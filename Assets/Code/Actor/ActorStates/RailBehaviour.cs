@@ -19,7 +19,7 @@ public class RailBehaviour : MonoBehaviour
     {
         //Debug.LogFormat("Entered the the railing {0}", other.name);
         Animator anim = other.GetComponent<Animator>();
-        anim.speed =0f;
+        anim.SetBool("Rail", true);
         anim.applyRootMotion = false;
         //locally check
         colliderToLocallyDisable.enabled = false;
@@ -43,7 +43,7 @@ public class RailBehaviour : MonoBehaviour
         if(!Mathf.Approximately(0f, timeStarted) && timeStarted+length < Time.time)
         {//need to check to see if local player here on photon
             Destroy(playersOnMe[0].GetComponent<SplineWalker>());
-            playersOnMe[0].GetComponent<Animator>().speed = 1f;
+            playersOnMe[0].GetComponent<Animator>().SetBool("Rail", false);
             playersOnMe[0].GetComponent<Animator>().applyRootMotion = true;
             colliderToLocallyDisable.enabled = true;
             playersOnMe.Remove((playersOnMe[0]));
