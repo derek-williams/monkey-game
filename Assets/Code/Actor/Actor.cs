@@ -3,6 +3,12 @@ using System.Collections;
 
 public class Actor : MonoBehaviour
 {
-    public Transform shoulder;
+  //Animations
+  public AnimationManager animationManager;
+
+  //idklol
+  public Transform shoulder;
+
+
 
 }
