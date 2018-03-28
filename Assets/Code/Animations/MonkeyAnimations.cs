@@ -12,13 +12,14 @@
 
   public enum Animation
   {
-    Idle,     //0
-    Jump,     //1
-    Swing,    //2
-    Slide,    //3
-    Grab,     //4
-    Hold,     //5
-    Throw,    //6
+    None,     //0
+    Idle,     //1
+    Jump,     //2
+    Swing,    //3
+    Slide,    //4
+    Grab,     //5
+    Hold,     //6
+    Throw,    //7
   }
 
   /// <summary>
