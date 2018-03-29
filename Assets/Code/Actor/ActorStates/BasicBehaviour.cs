@@ -20,8 +20,8 @@ public class BasicBehaviour : MonoBehaviour
 	private ThirdPersonOrbitCam camScript;                // Reference to the third person camera script.
 	private bool sprint;                                  // Boolean to determine whether or not the player activated the sprint mode.
 	private bool changedFOV;                              // Boolean to store when the sprint action has changed de camera FOV.
-	private int hFloat;                                   // Animator variable related to Horizontal Axis.
-	private int vFloat;                                   // Animator variable related to Vertical Axis.
+	private int hID;                                   // Animator variable related to Horizontal Axis.
+	private int vID;                                   // Animator variable related to Vertical Axis.
 	private List<GenericBehaviour> behaviours;            // The list containing all the enabled player behaviours.
 	private List<GenericBehaviour> overridingBehaviours;  // List of current overriding behaviours.
 	private Rigidbody rBody;                              // Reference to the player's rigidbody.
@@ -50,8 +50,8 @@ public class BasicBehaviour : MonoBehaviour
 		behaviours = new List<GenericBehaviour> ();
 		overridingBehaviours = new List<GenericBehaviour>();
         anim = transform.GetComponent<Animator> ();
-		hFloat = Animator.StringToHash("H");
-		vFloat = Animator.StringToHash("V");
+		hID = Animator.StringToHash("Strafe");
+		vID = Animator.StringToHash("Forward");
 		camScript = playerCamera.GetComponent<ThirdPersonOrbitCam> ();
 		rBody = GetComponent<Rigidbody> ();
 
@@ -67,8 +67,8 @@ public class BasicBehaviour : MonoBehaviour
 		v = Input.GetAxis("Vertical");
 
 		// Set the input axes on the Animator Controller.
-		anim.SetFloat(hFloat, h, 0.1f, Time.deltaTime);
-		anim.SetFloat(vFloat, v, 0.1f, Time.deltaTime);
+		anim.SetFloat(hID, h, 0.1f, Time.deltaTime);
+		anim.SetFloat(vID, v, 0.1f, Time.deltaTime);
 
 		// Toggle sprint by input.
 		sprint = Input.GetButton (sprintButton);

@@ -130,19 +130,20 @@ public class MoveBehaviour : GenericBehaviour
 		forward.y = 0.0f;
 		forward = forward.normalized;
 
+    
 		// Calculate target direction based on camera forward and direction key.
 		Vector3 right = new Vector3(forward.z, 0, -forward.x);
 		Vector3 targetDirection;
-		targetDirection = forward * vertical + right * horizontal;
+    
 
 		// Lerp current direction to calculated target direction.
-		if ((behaviourManager.IsMoving() && targetDirection != Vector3.zero))
+		if ((behaviourManager.IsMoving() && forward != Vector3.zero))
 		{
-			Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+			Quaternion targetRotation = Quaternion.LookRotation(forward);
 
 			Quaternion newRotation = Quaternion.Slerp(behaviourManager.GetRigidBody.rotation, targetRotation, behaviourManager.turnSmoothing);
 			behaviourManager.GetRigidBody.MoveRotation(newRotation);
-			behaviourManager.SetLastDirection(targetDirection);
+			behaviourManager.SetLastDirection(forward);
 		}
 		// If idle, Ignore current camera facing and consider last moving direction.
 		if (!(Mathf.Abs(horizontal) > 0.9 || Mathf.Abs(vertical) > 0.9))
@@ -150,7 +151,7 @@ public class MoveBehaviour : GenericBehaviour
 			behaviourManager.Repositioning();
 		}
 
-		return targetDirection;
+		return forward;
 	}
 
 	// Collision detection.
