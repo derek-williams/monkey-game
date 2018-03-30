@@ -44,6 +44,8 @@ public class BasicBehaviour : MonoBehaviour
 	// Get current default behaviour.
 	public int GetDefaultBehaviour {  get { return defaultBehaviour; } }
 
+  public Actor actor;
+
 	void Awake ()
 	{
 		// Set up the references.
@@ -58,16 +60,17 @@ public class BasicBehaviour : MonoBehaviour
 		// Grounded verification variables.
 		groundedBool = Animator.StringToHash("Grounded");
 		colExtents = GetComponent<Collider>().bounds.extents;
+    actor = GetComponent<Actor>();
 	}
 
 	void Update()
 	{
-		// Store the input axes.
-		h = Input.GetAxis("Horizontal");
-		v = Input.GetAxis("Vertical");
+    // Store the input axes.
+    h = actor.playerController.actorBindings.MoveAxes.X;
+		v = actor.playerController.actorBindings.MoveAxes.Y;
 
-		// Set the input axes on the Animator Controller.
-		anim.SetFloat(hID, h, 0.1f, Time.deltaTime);
+    // Set the input axes on the Animator Controller.
+    anim.SetFloat(hID, h, 0.1f, Time.deltaTime);
 		anim.SetFloat(vID, v, 0.1f, Time.deltaTime);
 
 		// Toggle sprint by input.
