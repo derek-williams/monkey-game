@@ -4,6 +4,7 @@
 public class ThirdPersonOrbitCam : MonoBehaviour 
 {
 	public Transform player;                                           // Player's reference.
+  public Actor actor;
 	public Vector3 pivotOffset = new Vector3(0.0f, 1.0f,  0.0f);       // Offset to repoint the camera.
 	public Vector3 camOffset   = new Vector3(0.4f, 0.5f, -2.0f);       // Offset to relocate the camera related to the player position.
 	public float smooth = 10f;                                         // Speed of camera responsiveness.
@@ -41,6 +42,8 @@ public class ThirdPersonOrbitCam : MonoBehaviour
 		// Reference to the camera transform.
 		cam = transform;
 
+    actor = player.GetComponent<Actor>();
+
 		// Set camera default position.
 		cam.position = player.position + Quaternion.identity * pivotOffset + Quaternion.identity * camOffset;
 		cam.rotation = Quaternion.identity;
@@ -64,11 +67,11 @@ public class ThirdPersonOrbitCam : MonoBehaviour
 	{
 		// Get mouse movement to orbit the camera.
 		// Mouse:
-		angleH += Mathf.Clamp(Input.GetAxis("Mouse X"), -1, 1) * horizontalAimingSpeed;
-		angleV += Mathf.Clamp(Input.GetAxis("Mouse Y"), -1, 1) * verticalAimingSpeed;
+		angleH += Mathf.Clamp(actor.playerController.actorBindings.AimAxes.X, -1, 1) * horizontalAimingSpeed;
+		angleV += Mathf.Clamp(actor.playerController.actorBindings.AimAxes.Y, -1, 1) * verticalAimingSpeed;
 		// Joystick:
-		angleH += Mathf.Clamp(Input.GetAxis(XAxis), -1, 1) * 60 * horizontalAimingSpeed * Time.deltaTime;
-		angleV += Mathf.Clamp(Input.GetAxis(YAxis), -1, 1) * 60 * verticalAimingSpeed * Time.deltaTime;
+		angleH += Mathf.Clamp(actor.playerController.actorBindings.AimAxes.X, -1, 1) * 60 * horizontalAimingSpeed * Time.deltaTime;
+		angleV += Mathf.Clamp(actor.playerController.actorBindings.AimAxes.Y, -1, 1) * 60 * verticalAimingSpeed * Time.deltaTime;
 
 		// Set vertical movement limit.
 		angleV = Mathf.Clamp(angleV, minVerticalAngle, targetMaxVerticalAngle);
