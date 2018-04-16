@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputManager : MonoBehaviour {
+public class RailState : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

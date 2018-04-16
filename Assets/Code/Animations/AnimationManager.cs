@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class AnimationManager : MonoBehaviour
 {
+  [HideInInspector]
   public Animator animator;
+  [HideInInspector]
   public Actor actor;
+
+  public float MovementDamp = .1f;
 
   private void Start()
   {
@@ -67,5 +71,11 @@ public class AnimationManager : MonoBehaviour
       animator.SetLayerWeight((int)region, Mathf.Lerp(startWeight, target, currentTime / time));
       yield return new WaitForEndOfFrame();
     }
+  }
+
+  public void SetMovementValues(float forward, float strafe)
+  {
+    animator.SetFloat("Forward", forward, MovementDamp, Time.deltaTime);
+    animator.SetFloat("Strafe", strafe, MovementDamp, Time.deltaTime);
   }
 }
