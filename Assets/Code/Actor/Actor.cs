@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
+using EasyEditor;
 
 public class Actor : MonoBehaviour
 {
@@ -10,8 +12,11 @@ public class Actor : MonoBehaviour
   //controls
   public ActorPlayerController playerController;
 
-  public Stack<ActorState> States;
   public ActorState CurrentState;
+  public Stack<ActorState> States;
+
+  public Arm LeftArm;
+  public Arm RightArm;
 
   //idklol
   public Transform shoulder;
@@ -22,23 +27,29 @@ public class Actor : MonoBehaviour
   {
     CheckForMissingDependencies();
 
-    PushState(new GroundState(), "Pushing to Grounded: Actor Awake");
+    PushMovementState(new GroundState(), "Pushing to Grounded: Actor Awake");
+    LeftArm = new Arm(this, MonkeyAnimations.BodyRegion.LeftArm, playerController.actorBindings.FireOne);
+    RightArm = new Arm(this, MonkeyAnimations.BodyRegion.RightArm, playerController.actorBindings.FireTwo);
   }
 
   public void Update()
   {
-    CurrentState.Update(this);
+    CurrentState.Update();
   }
 
   public void ProcessInput(float forward, float strafe)
   {
-    if (CurrentState != null)
-    {
-      CurrentState.ProcessInput(forward, strafe, this);
-    }
+    ProcessMovementInput(forward, strafe);
   }
 
-  public void PushState(ActorState state, string reason = "No Reason Given")
+  public void ProcessMovementInput(float forward, float strafe)
+  {
+    if (CurrentState == null) { return; }
+    
+    CurrentState.ProcessInput(forward, strafe);
+  }
+
+  public void PushMovementState(ActorState state, string reason = "No Reason Given")
   {
     if (States == null)
     {
@@ -60,7 +71,8 @@ public class Actor : MonoBehaviour
     States.Push(state);
 
     CurrentState = state;
-    CurrentState.Reset(this);
+    CurrentState.actor = this;
+    CurrentState.Reset();
 
     if (startingState != null && CurrentState != null)
     {
@@ -83,3 +95,4 @@ public class Actor : MonoBehaviour
     }
   }
 }
+

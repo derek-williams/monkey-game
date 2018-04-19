@@ -3,43 +3,43 @@ using System.Collections;
 
 public class GroundState : ActorState
 {
-  public override void GetHit(Actor actor)
+  public override void GetHit()
   {
-    throw new System.NotImplementedException();
+    base.GetHit();
   }
 
-  public override void Initialize(Actor actor)
+  public override void Initialize()
   {
-    throw new System.NotImplementedException();
+    base.Initialize();
   }
 
-  public override void PopState(Actor actor)
+  public override void PopState()
   {
-    throw new System.NotImplementedException();
+    base.PopState();
   }
 
-  public override void ProcessInput(float forward, float strafe, Actor actor)
+  public override void ProcessInput(float forward, float strafe)
   {
-    actor.animationManager.SetMovementValues(forward, strafe);
+    base.ProcessInput(forward, strafe);
   }
 
-  public override void PushState(Actor actor)
+  public override void PushState()
   {
-    throw new System.NotImplementedException();
+    base.PushState();
   }
 
-  public override void Reset(Actor actor)
+  public override void Reset()
   {
-    throw new System.NotImplementedException();
+    base.Reset();
   }
 
-  public override void SetActionInt(int actionInt, Actor actor)
+  public override void SetActionInt(int actionInt)
   {
-    throw new System.NotImplementedException();
+    base.SetActionInt(actionInt);
   }
 
-  public override void Update(Actor actor)
+  public override void Update()
   {
-    throw new System.NotImplementedException();
+    base.Update();
   }
 }

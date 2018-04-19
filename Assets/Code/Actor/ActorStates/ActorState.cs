@@ -2,22 +2,51 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class ActorState
+public class ActorState
 {
-  public abstract void Initialize(Actor actor);
+  public Actor actor;
 
-  public abstract void Reset(Actor actor);
+  public virtual void Initialize()
+  {
 
-  public abstract void Update(Actor actor);
+  }
 
-  public abstract void GetHit(Actor actor);
+  public virtual void Reset()
+  {
 
-  public abstract void PushState(Actor actor);
+  }
 
-  public abstract void PopState(Actor actor);
+  public virtual void Update()
+  {
+    actor.LeftArm.currentState.Update();
+    actor.RightArm.currentState.Update();
+  }
 
-  public abstract void ProcessInput(float forward, float strafe, Actor actor);
+  public virtual void GetHit()
+  {
 
-  public abstract void SetActionInt(int actionInt, Actor actor);
+  }
+
+  public virtual void PushState()
+  {
+
+  }
+
+  public virtual void PopState()
+  {
+
+  }
+
+  public virtual void ProcessInput(float forward, float strafe)
+  {
+    actor.animationManager.SetMovementValues(forward, strafe);
+    actor.LeftArm.ProcessInput();
+    actor.RightArm.ProcessInput();
+  }
+
+  public virtual void SetActionInt(int actionInt)
+  {
+
+  }
 }
 

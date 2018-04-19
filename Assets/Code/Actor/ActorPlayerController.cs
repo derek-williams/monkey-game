@@ -15,7 +15,7 @@ public class ActorPlayerController : MonoBehaviour
 
   private void FixedUpdate()
   {
-    actor.ProcessInput(actor.playerController.actorBindings.MoveAxes.Y, actor.playerController.actorBindings.MoveAxes.X);
+    actor.ProcessInput(actor.playerController.actorBindings.MoveAxes.Y, actor.playerController.actorBindings.MoveAxes.X); 
   }
 }
 
@@ -125,7 +125,7 @@ public class ActorPlayerControllerBindings : PlayerActionSet
 
     //set up default fire buttons
     actorBindings.FireOne.AddDefaultBinding(Mouse.LeftButton);
-    actorBindings.FireOne.AddDefaultBinding(Mouse.RightButton);
+    actorBindings.FireTwo.AddDefaultBinding(Mouse.RightButton);
 
     //setup default movement
     actorBindings.MoveForward.AddDefaultBinding(Key.W);

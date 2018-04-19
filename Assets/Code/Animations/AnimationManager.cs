@@ -38,6 +38,7 @@ public class AnimationManager : MonoBehaviour
     if (activeLayerRoutines.ContainsKey(region))
     {
       StopCoroutine(activeLayerRoutines[region]);
+      activeLayerRoutines.Remove(region);
     }
 
     //for any applied region, start layer weight routine
