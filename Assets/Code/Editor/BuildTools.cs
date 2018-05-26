@@ -64,7 +64,7 @@ public class BuildTools
 		var buildPath = Application.dataPath + "/../../Build" + deployPath + productName.Replace(" ", "") + ext;
 
 		EditorUserBuildSettings.SwitchActiveBuildTarget(buildTarget);
-		string errors = BuildPipeline.BuildPlayer(levels, buildPath, buildTarget, buildOptions);
+		//string errors = BuildPipeline.BuildPlayer(levels, buildPath, buildTarget, buildOptions);
 	}
 }
 
