@@ -30,6 +30,8 @@ public class Actor : MonoBehaviour
     PushMovementState(new GroundState(), "Pushing to Grounded: Actor Awake");
     LeftArm = new Arm(this, MonkeyAnimations.BodyRegion.LeftArm, playerController.actorBindings.FireOne);
     RightArm = new Arm(this, MonkeyAnimations.BodyRegion.RightArm, playerController.actorBindings.FireTwo);
+
+    WorldFollowCamera.Instance.AddTarget(this.transform, 1);
   }
 
   public void Update()
